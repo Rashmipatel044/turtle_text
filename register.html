@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web notes</title>
+</head>
+<style>
+    footer {
+        position: absolute;
+        width: 100%;
+        bottom: 10px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        column-gap: 300px;
+        align-items: center;
+    }
+
+    .c1,.c2,.c3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #ih{height: 70px;
+width: 70px;
+margin: 60px;}
+
+    .inst {
+        display: flex;
+        column-gap: 500px;
+    }
+
+    .count {
+        color: rgb(38, 134, 212);
+        font-size: x-large;
+    }
+
+    .hr {
+        color: rgb(38, 134, 212);
+    }
+
+    body {
+        background-image: url('vivid-blurred-colorful-wallpaper-background_58702-3798.avif');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    header {
+        position: relative;
+background-color: rgb(38, 134, 212);
+height: 86px;
+display: flex;
+align-items: center;
+border-radius: 10px;
+    }
+
+    .btnarea {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+
+    }
+
+    #add {
+        height: 53px;
+        width: 145px;
+        margin-top: 10px;
+        border-radius: 16px;
+        border: solid;
+        border-color: rgb(38, 134, 212);
+    }
+    .hidden{
+        display: none;
+    }
+    #btn{
+        border: solid;
+
+border-color: rgb(38, 134, 212);
+border-radius: 9px;
+height: 26px;
+width: 67px;
+background: rgb(38, 134, 212);
+color: white;
+    }
+
+    .par{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+ .note{
+    margin: 10px;
+ }
+textarea{height: 250px;
+width: 400px;
+border: 3px solid;
+
+border-color: rgb(38, 134, 212);
+border-radius: 7px;
+}
+   
+   .f1,.f2,.f3{
+    margin-top: 3px;
+    margin-bottom: 3px;
+   }
+</style>
+
+
+
+
+
+
+
+
+
+
+<body>
+    <header>
+        <img id="ih" src="Untitled.png" alt="" srcset="">
+        <h1>WEB NOTES</h1>
+    </header>
+    <main id="main">
+        <div class="btnarea">
+            <button id="add" id="add">ADD A NOTE</button>
+        </div>
+
+ 
+
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+
+        <hr class="hr">
+        <div class="container">
+            <div class="c1">
+                <div class="img1">
+                    <img src="Untitled.jpeg" alt="" srcset="" height="50px" width="50px">
+                </div>    
+                <h3 class="f1"> Project Completed</h3>
+                    <div class="count" data-target="400"></div>
+                
+            </div>
+            <div class="c2">
+                <div class="img2">
+                    <img src="images.png" alt="" srcset="" height="50px" width="50px">
+                </div>    <h3 class="f2"> People connected</h3>
+                    <div class="count" data-target="100"></div>
+                
+            </div>
+            <div class="c3">
+                <div class="img3">
+                    <img src="Untitled3.png" alt="" srcset="" height="50px" width="50px">
+
+                </div>
+                <h3 class="f3"> ongoing Project</h3>
+                <div class="count" data-target="20"></div>
+            </div>
+
+
+        </div>
+
+
+    </footer>
+
+</body>
+<script>
+    const addbutton = document.querySelector('#add');
+       
+    let  pard = document.createElement('div');
+   pard.classList.add('par');
+       pard.style ="display:flex;";
+       document.getElementById('main').appendChild(pard);
+
+
+    const addnewnote = (text = '') => {
+       
+
+        const note = document.createElement('div');
+        note.classList.add('note');
+        const htmldata = `
+            <div class="operation">
+
+                <button class="edit"id="btn"> edit</button>
+                <button class="delete"id="btn"> delete</button>
+                <button class="Save"id="btn">Save</button>
+                <div class="main ">
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
+            </div>`;
+note.insertAdjacentHTML('afterbegin',htmldata) 
+console.log(note)
+;
+
+const editbtn =note.querySelector('.edit');
+const delbtn =note.querySelector('.delete');
+const savebtn=note.querySelector('.save');
+
+
+delbtn.addEventListener('click', () => {
+    note.remove();
+});
+
+
+
+pard.appendChild(note);
+
+
+    }
+    addbutton.addEventListener('click', () => { addnewnote() });
+
+
+
+
+
+
+  //**************************************************//
+
+    const count = document.querySelectorAll('.count')
+    count.forEach((count) => {
+        console.log(count);
+        count.innerHTML = 0;
+        const updatecounter = () => {
+            const targetcount = +count.getAttribute('data-target');
+            console.log(typeof targetcount);
+            const startcount = Number(count.innerHTML);
+            const incr = targetcount / 10;
+            if (startcount < targetcount) {
+                count.innerHTML = `${startcount + incr}`
+                setTimeout(updatecounter, 500)
+            }
+            else {
+                count.innerHTML = targetcount;
+            }
+        }
+        updatecounter();
+
+    })
+
+</script>
+
+</html>
